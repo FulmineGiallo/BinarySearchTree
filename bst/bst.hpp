@@ -95,7 +95,7 @@ public:
 
   // type MinNRemove(argument) specifiers;
   // (concrete function must throw std::length_error when empty)
-  Data& MinNRemove();
+  const Data& MinNRemove();
 
   // type RemoveMin(argument) specifiers;
   // (concrete function must throw std::length_error when empty)
@@ -107,7 +107,7 @@ public:
 
   // type MaxNRemove(argument) specifiers;
   // (concrete function must throw std::length_error when empty)
-  Data& MaxNRemove();
+  const Data& MaxNRemove();
 
   // type RemoveMax(argument) specifiers;
   // (concrete function must throw std::length_error when empty)
@@ -119,7 +119,7 @@ public:
 
   // type PredecessorNRemove(argument) specifiers;
   // (concrete function must throw std::length_error when empty)
-  Data& PredecessorNRemove(const Data&);
+  const Data& PredecessorNRemove(const Data&);
 
   // type RemovePredecessor(argument) specifiers;
   // (concrete function must throw std::length_error when empty)
@@ -131,7 +131,7 @@ public:
 
   // type SuccessorNRemove(argument) specifiers;
   // (concrete function must throw std::length_error when empty)
-  Data& SuccessorNRemove(const Data&);
+  const Data& SuccessorNRemove(const Data&);
 
   // type RemoveSuccessor(argument) specifiers;
   // (concrete function must throw std::length_error when empty)
@@ -148,37 +148,37 @@ public:
 protected:
 
   // Auxiliary member functions
-
-  // type DataNDelete(argument) specifiers;
-
-
-  // type Detach(argument) specifiers;
+  Data DataNDelete(NodeLnk*);
 
 
-  // type DetachMin(argument) specifiers;
+  NodeLnk*  Detach(NodeLnk*&) noexcept;
 
 
-  // type DetachMax(argument) specifiers;
+  NodeLnk* DetachMin(NodeLnk*&) noexcept;
 
 
-  // type SkipOnLeft(argument) specifiers;
+  NodeLnk*  DetachMax(NodeLnk*&) noexcept;
 
 
-  // type SkipOnRight(argument) specifiers;
+  NodeLnk*  SkipOnLeft(NodeLnk*&)  noexcept;
+  NodeLnk* SkipOnRight(NodeLnk*&) noexcept;
 
 
-  NodeLnk*& FindPointerToMin(NodeLnk* const&);
-
-  NodeLnk*& FindPointerToMax(NodeLnk* const&);
-
-
+  /* FIND POINTER TO MIN */
+  NodeLnk*& FindPointerToMin(NodeLnk*&) noexcept;
+  NodeLnk* const& FindPointerToMin(NodeLnk* const&)  const noexcept;
+  /* FIND POINTER TO MAX */
+  NodeLnk*& FindPointerToMax(NodeLnk*&) noexcept;
+  NodeLnk* const& FindPointerToMax(NodeLnk* const&)  const noexcept;
+  /* FIND POINTER TO*/
   NodeLnk* const& FindPointerTo(NodeLnk* const&, const Data&)  const noexcept;
-  NodeLnk*& FindPointerTo(NodeLnk* const&, const Data&) noexcept;
-
-
-
-  NodeLnk*& FindPointerToPredecessor(NodeLnk* const&,const Data&);
-  NodeLnk*& FindPointerToSuccessor(NodeLnk* const&,const Data&);
+  NodeLnk*& FindPointerTo(NodeLnk*&, const Data&) noexcept;
+  /* FIND POINTER TO Predecessor */
+  NodeLnk* const& FindPointerToPredecessor(NodeLnk* const&, const Data&) const noexcept;
+  NodeLnk*& FindPointerToPredecessor(NodeLnk*&, const Data&) noexcept;
+  /* FIND POINTER TO Successor */
+  NodeLnk* const& FindPointerToSuccessor(NodeLnk* const&,const Data&) const noexcept;
+  NodeLnk*& FindPointerToSuccessor(NodeLnk*&, const Data&) noexcept;
 
 
 };

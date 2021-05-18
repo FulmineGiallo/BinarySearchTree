@@ -1,5 +1,6 @@
 
-namespace lasd {
+namespace lasd
+{
 
 /* ************************************************************************** */
 
@@ -85,7 +86,7 @@ template<typename Data>
 void BST<Data>::Insert(Data&& val) noexcept
 {
   NodeLnk*& insert = FindPointerTo(root, val);
-  if(&(insert) == nullptr)
+  if(insert == nullptr)
   {
     insert = new typename BinaryTreeLnk<Data>::NodeLnk();
     insert->Element() = std::move(val);
@@ -97,7 +98,7 @@ void BST<Data>::Insert(Data&& val) noexcept
 template<typename Data>
 void BST<Data>::Remove(const Data val)
 {
-
+  delete Detach(FindPointerTo(root, val));
 }
 
 // Min
@@ -107,23 +108,28 @@ const Data& BST<Data>::Min() const
   if(BinaryTreeLnk<Data>::Empty())
      throw std::length_error("Non esiste un MIN in un albero vuoto.");
   else
-  {
-    
-  }
+    return FindPointerToMin(root)->element;
 }
 
 // MinNRemove
 template<typename Data>
-Data& BST<Data>::MinNRemove()
+const Data& BST<Data>::MinNRemove()
 {
-  Min();
+  if(root != nullptr)
+    return DataNDelete(DetachMin(root));
+  else
+    throw std::length_error("Non puoi rimuovere da un albero vuoto");
 }
 
 // RemoveMin
 template<typename Data>
 void BST<Data>::RemoveMin()
 {
-  Min();
+  if(root != nullptr)
+    delete DetachMin(root);
+  else
+    throw std::length_error("Non puoi rimuovere da un albero vuoto");
+
 }
 
 // Max
@@ -132,19 +138,31 @@ const Data& BST<Data>::Max() const
 {
   if(BinaryTreeLnk<Data>::Empty())
      throw std::length_error("Non esiste un MAX in un albero vuoto.");
+  else
+  {
+    return FindPointerToMax(root)->element;
+  }
+
 }
 
 // MaxNRemove
 template<typename Data>
-Data& BST<Data>::MaxNRemove()
+const Data& BST<Data>::MaxNRemove()
 {
-
+  if(root != nullptr)
+    return DataNDelete(DetachMax(root));
+  else
+    throw std::length_error("Non puoi rimuovere da un albero vuoto");
 }
 
 // RemoveMax
 template<typename Data>
 void BST<Data>::RemoveMax()
 {
+  if(root != nullptr)
+    delete DetachMax(root);
+  else
+    throw std::length_error("Non puoi rimuovere da un albero vuoto");
 
 }
 
@@ -154,18 +172,31 @@ const Data& BST<Data>::Predecessor(const Data& val) const
 {
   if(BinaryTreeLnk<Data>::Empty())
      throw std::length_error("Non esiste un Predecessor in un albero vuoto.");
+  else
+  {
+    NodeLnk *pre = FindPointerToPredecessor(root, val);
+    if(pre == nullptr)
+       throw std::length_error("Non esiste un Predecessor");
+    else
+      return pre->element;
+  }
+
+
 }
 
 // PredecessorNRemove
 template<typename Data>
-Data& BST<Data>::PredecessorNRemove(const Data& val){
-
+const Data& BST<Data>::PredecessorNRemove(const Data& val){
+  const Data& pre = Predecessor(val);
+  Remove(pre);
+  return pre;
 }
 
 // RemovePredecessor
 template<typename Data>
 void BST<Data>::RemovePredecessor(const Data& val){
-
+  const Data& pre = Predecessor(val);
+   Remove(pre);
 }
 
 // Successor
@@ -174,18 +205,30 @@ const Data& BST<Data>::Successor(const Data& val) const
 {
   if(BinaryTreeLnk<Data>::Empty())
      throw std::length_error("Non esiste un Successor in un albero vuoto.");
+  else
+  {
+    NodeLnk *pre = FindPointerToSuccessor(root, val);
+    if(pre == nullptr)
+       throw std::length_error("Non esiste un Successor");
+    else
+      return pre->element;
+  }
 }
 
 // SuccessorNRemove
 template<typename Data>
-Data& BST<Data>::SuccessorNRemove(const Data& val){
-
+const Data& BST<Data>::SuccessorNRemove(const Data& val)
+{
+  const Data& suc = Successor(val);
+  Remove(suc);
+  return suc;
 }
 
 // RemoveSuccessor
 template<typename Data>
 void BST<Data>::RemoveSuccessor(const Data& val){
-
+  const Data& suc = Successor(val);
+  Remove(suc);
 }
 
 // Exists
@@ -218,55 +261,156 @@ typename BinaryTreeLnk<Data>::NodeLnk* const& BST<Data>::FindPointerTo(NodeLnk* 
   return nodo;
 
 }
+
 template <typename Data>
-typename BinaryTreeLnk<Data>::NodeLnk*&  BST<Data>::FindPointerTo(NodeLnk* const& nodo,const Data& element) noexcept
+typename BinaryTreeLnk<Data>::NodeLnk* const& BST<Data>::FindPointerToMin(NodeLnk* const& nodo) const noexcept
+{
+  if(nodo != nullptr)
+  {
+    if(nodo->left != nullptr)
+      return FindPointerToMin(nodo->left);
+  }
+  return nodo;
+}
+template <typename Data>
+typename BinaryTreeLnk<Data>::NodeLnk* const& BST<Data>::FindPointerToMax(NodeLnk* const& nodo) const noexcept
+{
+  if(nodo != nullptr)
+  {
+    if(nodo->right != nullptr)
+      return FindPointerToMax(nodo->right);
+  }
+  return nodo;
+}
+
+template <typename Data>
+typename BinaryTreeLnk<Data>::NodeLnk*&  BST<Data>::FindPointerToMin(NodeLnk*& nodo) noexcept
+{
+  return const_cast<NodeLnk*&>(static_cast<const BST<Data>*>(this)->FindPointerToMin(nodo));
+}
+template <typename Data>
+typename BinaryTreeLnk<Data>::NodeLnk*&  BST<Data>::FindPointerToMax(NodeLnk*& nodo) noexcept
+{
+  return const_cast<NodeLnk*&>(static_cast<const BST<Data>*>(this)->FindPointerToMax(nodo));
+}
+template <typename Data>
+typename BinaryTreeLnk<Data>::NodeLnk*&  BST<Data>::FindPointerTo(NodeLnk*& nodo,const Data& element) noexcept
 {
   return const_cast<NodeLnk*&>(static_cast<const BST<Data>*>(this)->FindPointerTo(nodo,element));
 }
+template <typename Data>
+typename BinaryTreeLnk<Data>::NodeLnk*&  BST<Data>::FindPointerToPredecessor(NodeLnk*& nodo, const Data& val) noexcept
+{
+  return const_cast<NodeLnk*&>(static_cast<const BST<Data>*>(this)->FindPointerToPredecessor(nodo, val));
+}
+template <typename Data>
+typename BinaryTreeLnk<Data>::NodeLnk*&  BST<Data>::FindPointerToSuccessor(NodeLnk*& nodo, const Data& val) noexcept
+{
+  return const_cast<NodeLnk*&>(static_cast<const BST<Data>*>(this)->FindPointerToSuccessor(nodo, val));
+}
 
 /* ************************************************************************** */
-// template <typename Data>
-// typename BinaryTreeLnk<Data>::NodeLnk* const& BST<Data>::FindPointerToMin(NodeLnk* const& nodo)
-// {
-//   // NodeLnk* ret = nodo;
-//   //
-//   // if(ret->HasLeftChild())
-//   //     ret = FindPointerToMin(nodo->LeftChild());
-//   // return ret;
-// }
-// template <typename Data>
-// typename BinaryTreeLnk<Data>::NodeLnk* const& BST<Data>::FindPointerToMax(NodeLnk* const& nodo)
-// {
-//   // NodeLnk* ret = nodo;
-//   //
-//   // if(ret->HasRightChild())
-//   //     ret = FindPointerToMin(nodo->RightChild());
-//   // return ret;
-// }
-// template<typename Data>
-// typename BinaryTreeLnk<Data>::NodeLnk& BST<Data>::FindPointerToPredecessor(const NodeLnk root, const Data& item)
-// {
-//   // static NodeLnk* ret = nullptr;
-//   // if(root->Element() < item){
-//   //   if(root->HasRightChild()) ret = FindPointerToPredecessor(root->RightChild(), item);
-//   //   if(ret == nullptr) ret = root;
-//   // }
-//   // if(root->Element() > item){
-//   //   if(root->HasLeftChild()) ret = FindPointerToPredecessor(root->LeftChild(), item);
-//   // }
-//   // return ret;
-// }
-//
-// template<typename Data>
-// typename BinaryTreeLnk<Data>::NodeLnk& BST<Data>::FindPointerToSuccessor(const NodeLnk root, const Data& item){
-//   // static NodeLnk* ret = nullptr;
-//   // if(root->Element() > item){
-//   //   if(root->HasLeftChild()) ret = FindPointerToSuccessor(root->LeftChild(), item);
-//   //   if(ret == nullptr) ret = root;
-//   // }
-//   // if(root->Element() < item){
-//   //   if(root->HasRightChild()) ret = FindPointerToSuccessor(root->RightChild(), item);
-//   // }
-//   // return ret;
-// }
+
+template<typename Data>
+typename BinaryTreeLnk<Data>::NodeLnk* const& BST<Data>::FindPointerToPredecessor(NodeLnk* const& nodo, const Data& val) const noexcept
+{
+    NodeLnk* const* pre = nullptr;
+    NodeLnk* const* cur = &nodo;
+    while(*cur != nullptr){
+      if(val > (*cur)->element){
+        pre = cur;
+        cur = &((*cur)->right);
+      }
+      else{
+        cur = &((*cur)->left);
+      }
+    }
+    if(pre == nullptr)
+      return *cur;
+    else
+      return *pre;
+}
+
+template<typename Data>
+typename BinaryTreeLnk<Data>::NodeLnk* const& BST<Data>::FindPointerToSuccessor(NodeLnk* const& nodo, const Data& val)  const noexcept
+{
+   NodeLnk* const* suc = nullptr;
+   NodeLnk* const* cur = &nodo;
+   while(*cur != nullptr)
+   {
+     if(val >= (*cur)->element){
+       cur = &((*cur)->right);
+     }
+     else{
+       suc = cur;
+       cur = &((*cur)->left);
+     }
+   }
+   if(suc == nullptr)
+     return *cur;
+   return *suc;
+
+}
+
+template<typename Data>
+typename BinaryTreeLnk<Data>::NodeLnk* BST<Data>::Detach(NodeLnk*& root) noexcept
+{
+  if(root != nullptr){
+    if(root->left == nullptr){
+      return SkipOnRight(root);
+    }
+    else if(root->right == nullptr){
+      return SkipOnLeft(root);
+    }
+    else{
+      NodeLnk* massimo = DetachMax(root->left);
+      std::swap(root->element, massimo->element);
+      return massimo;
+    }
+  }
+  return nullptr;
+}
+
+template<typename Data>
+typename BinaryTreeLnk<Data>::NodeLnk* BST<Data>::SkipOnRight(NodeLnk*& nodo) noexcept
+{
+  NodeLnk* rig = nullptr;
+  if(nodo != nullptr)
+  {
+    std::swap(rig, nodo->right);
+    std::swap(rig, nodo);
+    --size;
+  }
+  return rig;
+}
+template<typename Data>
+typename BinaryTreeLnk<Data>::NodeLnk* BST<Data>::SkipOnLeft(NodeLnk*& nodo) noexcept
+{
+  NodeLnk* left = nullptr;
+  if(nodo != nullptr)
+  {
+    std::swap(left, nodo->left);
+    std::swap(left, nodo);
+    --size;
+  }
+  return left;
+}
+template<typename Data>
+typename BinaryTreeLnk<Data>::NodeLnk* BST<Data>::DetachMax(NodeLnk*& nodo) noexcept
+{
+  return SkipOnLeft(FindPointerToMax(nodo));
+}
+template<typename Data>
+typename BinaryTreeLnk<Data>::NodeLnk* BST<Data>::DetachMin(NodeLnk*& nodo) noexcept
+{
+  return SkipOnRight(FindPointerToMin(nodo));
+}
+template<typename Data>
+Data BST<Data>::DataNDelete(NodeLnk* nodo)
+{
+  Data valore {};
+  std::swap(valore, nodo->element);
+  delete nodo;
+  return valore;
+}
 }
