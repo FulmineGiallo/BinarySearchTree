@@ -113,6 +113,7 @@ namespace lasd
       cout << "9. Successore" << endl;
       cout << "10. Inserisci" << endl;
       cout << "11. Rimuovi" << endl;
+      cout << "12. Size Albero" << endl;
       cout << "0. Per uscire dal programma" << endl;
       cin >> scelta;
       cout << endl;
@@ -968,13 +969,13 @@ namespace lasd
         {
           float dato = 0;
           cin >> dato;
-          treeint.Insert(dato);
+          treefloat.Insert(dato);
         }
         if(type == 3)
         {
-          string dato = 0;
+          string dato = "";
           cin >> dato;
-          treeint.Insert(dato);
+          treestring.Insert(dato);
         }
       }
       if(scelta == 11)
@@ -991,15 +992,25 @@ namespace lasd
         {
           float dato = 0;
           cin >> dato;
-          treeint.Remove(dato);
+          treefloat.Remove(dato);
         }
         if(type == 3)
         {
-          string dato = 0;
+          string dato = "";
           cin >> dato;
-          treeint.Remove(dato);
+          treestring.Remove(dato);
         }
       }
+      if(scelta == 12)
+      {
+        if(type == 1)
+         cout << "Size : " << treeint.Size();
+        if(type == 2)
+         cout << "Size : " << treefloat.Size();
+        if(type == 3)
+         cout << "Size : " << treestring.Size()3;
+      }
+
     }
 
  }
