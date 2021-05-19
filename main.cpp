@@ -23,7 +23,7 @@ int main() {
   search.Insert(5);
 
   std::cout << "Predecessor :" << search.Predecessor(1);
-
+  std::cout << "PredecessorNRemove :" << search.Predecessor(4);
   // lasd::Vector<int> vec(5);
   // vec[0] = 1;
   // vec[1] = 2;

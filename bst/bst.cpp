@@ -383,7 +383,6 @@ typename BinaryTreeLnk<Data>::NodeLnk* BST<Data>::Detach(NodeLnk*& root) noexcep
   }
   return nullptr;
 }
-
 template<typename Data>
 typename BinaryTreeLnk<Data>::NodeLnk* BST<Data>::SkipOnRight(NodeLnk*& nodo) noexcept
 {
@@ -418,12 +417,5 @@ typename BinaryTreeLnk<Data>::NodeLnk* BST<Data>::DetachMin(NodeLnk*& nodo) noex
 {
   return SkipOnRight(FindPointerToMin(nodo));
 }
-template<typename Data>
-Data BST<Data>::DataNDelete(NodeLnk* nodo)
-{
-  Data valore {};
-  std::swap(valore, nodo->element);
-  delete nodo;
-  return valore;
-}
+
 }

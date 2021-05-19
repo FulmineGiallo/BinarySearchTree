@@ -148,21 +148,15 @@ public:
 protected:
 
   // Auxiliary member functions
-  Data DataNDelete(NodeLnk*);
+  // Data DataNDelete(NodeLnk*);
 
 
   NodeLnk*  Detach(NodeLnk*&) noexcept;
-
-
   NodeLnk* DetachMin(NodeLnk*&) noexcept;
-
-
   NodeLnk*  DetachMax(NodeLnk*&) noexcept;
-
 
   NodeLnk*  SkipOnLeft(NodeLnk*&)  noexcept;
   NodeLnk* SkipOnRight(NodeLnk*&) noexcept;
-
 
   /* FIND POINTER TO MIN */
   NodeLnk*& FindPointerToMin(NodeLnk*&) noexcept;
