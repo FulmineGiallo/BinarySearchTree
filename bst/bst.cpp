@@ -96,7 +96,7 @@ void BST<Data>::Insert(Data&& val) noexcept
 
 // Remove
 template<typename Data>
-void BST<Data>::Remove(const Data val)
+void BST<Data>::Remove(const Data& val)
 {
   delete Detach(FindPointerTo(root, val));
 }

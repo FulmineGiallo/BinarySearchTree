@@ -1,0 +1,23 @@
+zmytest/test.cpp: In function 'void lasd::MenuSearch(int, int)':
+zmytest/test.cpp:977:30: error: no matching function for call to 'lasd::BST<int>::Insert(std::__cxx11::string&)'
+           treeint.Insert(dato);
+                              ^
+In file included from zmytest/../bst/bst.hpp:184,
+                 from zmytest/test.cpp:18:
+zmytest/../bst/bst.cpp:74:6: note: candidate: 'void lasd::BST<Data>::Insert(const Data&) [with Data = int]'
+ void BST<Data>::Insert(const Data& val)
+      ^~~~~~~~~
+zmytest/../bst/bst.cpp:74:6: note:   no known conversion for argument 1 from 'std::__cxx11::string' {aka 'std::__cxx11::basic_string<char>'} to 'const int&'
+zmytest/../bst/bst.cpp:86:6: note: candidate: 'void lasd::BST<Data>::Insert(Data&&) [with Data = int]'
+ void BST<Data>::Insert(Data&& val) noexcept
+      ^~~~~~~~~
+zmytest/../bst/bst.cpp:86:6: note:   no known conversion for argument 1 from 'std::__cxx11::string' {aka 'std::__cxx11::basic_string<char>'} to 'int&&'
+zmytest/test.cpp:1000:30: error: no matching function for call to 'lasd::BST<int>::Remove(std::__cxx11::string&)'
+           treeint.Remove(dato);
+                              ^
+In file included from zmytest/../bst/bst.hpp:184,
+                 from zmytest/test.cpp:18:
+zmytest/../bst/bst.cpp:99:6: note: candidate: 'void lasd::BST<Data>::Remove(Data) [with Data = int]'
+ void BST<Data>::Remove(const Data val)
+      ^~~~~~~~~
+zmytest/../bst/bst.cpp:99:6: note:   no known conversion for argument 1 from 'std::__cxx11::string' {aka 'std::__cxx11::basic_string<char>'} to 'int'

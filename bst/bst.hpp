@@ -87,7 +87,7 @@ public:
   void Insert(Data&&) noexcept;
 
   // type Remove(argument) specifiers;
-  void Remove(const Data);
+  void Remove(const Data&);
 
   // type Min(argument) specifiers;
   // (concrete function must throw std::length_error when empty)

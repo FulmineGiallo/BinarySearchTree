@@ -107,18 +107,12 @@ namespace lasd
       cout << "3. Visualizzazioni elementi {Ampiezza, Pre-ordine, ordine, post-ordine}" << endl;
       cout << "4. Controllo di esistenza di un valore" << endl;
       cout << "5. Funzioni Fold" << endl;
-      cout << "6. Minimo Albero" << endl;
-      cout << "7. Massimo Albero" << endl;
-      cout << "8. Remove Massimo" << endl;
-      cout << "9. Remove Minimo" << endl;
-      cout << "10. Leggi Massimo e Rimuovilo" << endl;
-      cout << "11. Leggi Minimo  e Rimuovilo" << endl;
-      cout << "12. Predecessore" << endl;
-      cout << "13. Successore" << endl;
-      cout << "14. Remove Predecessore" << endl;
-      cout << "15. Remove Successore" << endl;
-      cout << "16. Leggi Predecessore e Rimuovilo" << endl;
-      cout << "17. Leggi Successore e Rimuovilo" << endl;
+      cout << "6. Minimo" << endl;
+      cout << "7. Massimo" << endl;
+      cout << "8. Predecessore" << endl;
+      cout << "9. Successore" << endl;
+      cout << "10. Inserisci" << endl;
+      cout << "11. Rimuovi" << endl;
       cout << "0. Per uscire dal programma" << endl;
       cin >> scelta;
       cout << endl;
@@ -718,124 +712,293 @@ namespace lasd
       }
       if(scelta == 6)
       {
-        if(type == 1)
+        int scelta;
+        cout << "1. Leggi Minimo" << endl;
+        cout << "2. Rimuovi Minimo" << endl;
+        cout << "3. Leggi Minimo  e Rimuovilo" << endl;
+        cin  >> scelta;
+        if(type == 1 && scelta == 1)
         {
           cout << "Minimo : " << treeint.Min() << endl;
         }
-        if(type == 2)
+        if(type == 2 && scelta == 1)
         {
           cout << "Minimo : " << treefloat.Min() << endl;
         }
-        if(type == 3)
+        if(type == 3 && scelta == 1)
         {
           cout << "Minimo : " << treestring.Min() << endl;
         }
-      }
-      if(scelta == 7)
-      {
-        if(type == 1)
-        {
-          cout << "Massimo : " << treeint.Max() << endl;
-        }
-        if(type == 2)
-        {
-          cout << "Massimo : " << treefloat.Max() << endl;
-        }
-        if(type == 3)
-        {
-          cout << "Massimo : " << treestring.Max() << endl;
-        }
-      }
-      if(scelta == 8)
-      {
-        if(type == 1)
-        {
-          cout << "Rimosso Massimo : " << endl;
-          treeint.RemoveMax();
-        }
-        if(type == 2)
-        {
-          cout << "Rimosso Massimo : " << endl;
-          treefloat.RemoveMax();
-        }
-        if(type == 3)
-        {
-          cout << "Rimosso Massimo : " << endl;
-          treestring.RemoveMax();
-      }
-
-    }
-      if(scelta == 9)
-      {
-        if(type == 1)
+        if(type == 1 && scelta == 2)
         {
           cout << "Rimosso Minimo : " << endl;
           treeint.RemoveMin();
         }
-        if(type == 2)
+        if(type == 2 && scelta == 2)
         {
           cout << "Rimosso Minimo : " << endl;
           treefloat.RemoveMin();
         }
-        if(type == 3)
+        if(type == 3 && scelta == 2)
         {
           cout << "Rimosso Minimo : " << endl;
           treestring.RemoveMin();
         }
+        if(type == 1 && scelta == 3)
+        {
+            cout << "Rimosso Minimo " << treeint.MinNRemove() << endl;
+        }
+        if(type == 2 && scelta == 3)
+        {
+            cout << "Rimosso Minimo " << treefloat.MinNRemove() << endl;
+        }
+        if(type == 3 && scelta == 3)
+        {
+            cout << "Rimosso Minimo " << treestring.MinNRemove() << endl;
+        }
+      }
+      if(scelta == 7)
+      {
+        int scelta;
+        cout << "1. Leggi Massimo" << endl;
+        cout << "2. Rimuovi Massimo" << endl;
+        cout << "3. Leggi Massimo  e Rimuovilo" << endl;
+        cin  >> scelta;
+        if(type == 1 && scelta == 1)
+        {
+          cout << "Massimo : " << treeint.Max() << endl;
+        }
+        if(type == 2 && scelta == 1)
+        {
+          cout << "Massimo : " << treefloat.Max() << endl;
+        }
+        if(type == 3 && scelta == 1)
+        {
+          cout << "Massimo : " << treestring.Max() << endl;
+        }
+        if(type == 1 && scelta == 2)
+        {
+          cout << "Rimosso Massimo : " << endl;
+          treeint.RemoveMax();
+        }
+        if(type == 2 && scelta == 2)
+        {
+          cout << "Rimosso Massimo : " << endl;
+          treefloat.RemoveMax();
+        }
+        if(type == 3 && scelta == 2)
+        {
+          cout << "Rimosso Massimo : " << endl;
+          treestring.RemoveMax();
+        }
+        if(type == 1 && scelta == 3)
+        {
+            cout << "Rimosso Massimo " << treeint.MaxNRemove() << endl;
+        }
+        if(type == 2 && scelta == 3)
+        {
+            cout << "Rimosso Massimo " << treefloat.MaxNRemove() << endl;
+        }
+        if(type == 3 && scelta == 3)
+        {
+            cout << "Rimosso Massimo " << treestring.MaxNRemove() << endl;
+        }
+      }
+      if(scelta == 8)
+      {
+        int scelta = 0;
+        cout << "1. Predecessore" << endl;
+        cout << "2. Remove Predecessore" << endl;
+        cout << "3. Leggi Predecessore e Rimuovilo" << endl;
+        cin  >> scelta;
+        if(type == 1 && scelta == 1)
+        {
+          int pre = 0;
+          cout << "Inserisci il Predecessore da trovare" << endl;
+          cin  >> pre;
+          cout << "Predecessore di " << pre << " : " << treeint.Predecessor(pre) << endl;
+        }
+        if(type == 2 && scelta == 1)
+        {
+          float pre = 0;
+          cout << "Inserisci il Predecessore da trovare" << endl;
+          cin  >> pre;
+          cout << "Predecessore di " << pre << " : " << treefloat.Predecessor(pre) << endl;
+        }
+        if(type == 3 && scelta == 1)
+        {
+          string pre = "";
+          cout << "Inserisci il Predecessore da trovare" << endl;
+          cin  >> pre;
+          cout << "Predecessore di " << pre << " : " << treestring.Predecessor(pre) << endl;
+        }
+        if(type == 1 && scelta == 2)
+        {
+          int val = 0;
+          cout << "Inserisci elemento" << endl;
+          cout << "Rimosso Predecessore se esiste : " << endl;
+          treeint.RemovePredecessor(val);
+        }
+        if(type == 2 && scelta == 2)
+        {
+          float val = 0;
+          cout << "Inserisci elemento" << endl;
+          cin  >> val;
+          cout << "Rimosso Predecessore se esiste : " << endl;
+          treefloat.RemovePredecessor(val);
+        }
+        if(type == 3 && scelta == 2)
+        {
+          string val = "";
+          cout << "Inserisci elemento" << endl;
+          cin  >> val;
+          cout << "Rimosso Predecessore se esiste : " << endl;
+          treestring.RemovePredecessor(val);
+        }
+        if(type == 1 && scelta == 3)
+        {
+          int val = 0;
+          cout << "Inserisci elemento" << endl;
+          cin  >> val;
+          cout << "Rimosso Predecessore se esiste : " << treeint.PredecessorNRemove(val) << endl;
+
+        }
+        if(type == 2 && scelta == 3)
+        {
+          float val = 0;
+          cout << "Inserisci elemento" << endl;
+          cin  >> val;
+          cout << "Rimosso Predecessore se esiste : " << treefloat.PredecessorNRemove(val) << endl;
+
+        }
+        if(type == 3 && scelta == 3)
+        {
+          string val = "";
+          cout << "Inserisci elemento" << endl;
+          cin  >> val;
+          cout << "Rimosso Predecessore se esiste : " << treestring.PredecessorNRemove(val) << endl;
+        }
+      }
+      if(scelta == 9)
+      {
+        int scelta = 0;
+        cout << "1. Successore" << endl;
+        cout << "2. Remove Successore" << endl;
+        cout << "3. Leggi Successore e Rimuovilo" << endl;
+        cin  >> scelta;
+        if(type == 1 && scelta == 1)
+        {
+          int pre = 0;
+          cout << "Inserisci il Successore da trovare" << endl;
+          cin  >> pre;
+          cout << "Successore di " << pre << " : " << treeint.Successor(pre) << endl;
+        }
+        if(type == 2 && scelta == 1)
+        {
+          float pre = 0;
+          cout << "Inserisci il Successore da trovare" << endl;
+          cin  >> pre;
+          cout << "Successore di " << pre << " : " << treefloat.Successor(pre) << endl;
+        }
+        if(type == 3 && scelta == 1)
+        {
+          string pre = "";
+          cout << "Inserisci il Successore da trovare" << endl;
+          cin  >> pre;
+          cout << "Successore di " << pre << " : " << treestring.Successor(pre) << endl;
+        }
+        if(type == 1 && scelta == 2)
+        {
+          int val = 0;
+          cout << "Inserisci elemento" << endl;
+          cout << "Rimosso Successore se esiste : " << endl;
+          treeint.RemoveSuccessor(val);
+        }
+        if(type == 2 && scelta == 2)
+        {
+          float val = 0;
+          cout << "Inserisci elemento" << endl;
+          cin  >> val;
+          cout << "Rimosso Successore se esiste : " << endl;
+          treefloat.RemoveSuccessor(val);
+        }
+        if(type == 3 && scelta == 2)
+        {
+          string val = "";
+          cout << "Inserisci elemento" << endl;
+          cin  >> val;
+          cout << "Rimosso Successore se esiste : " << endl;
+          treestring.RemoveSuccessor(val);
+        }
+        if(type == 1 && scelta == 3)
+        {
+          int val = 0;
+          cout << "Inserisci elemento" << endl;
+          cin  >> val;
+          cout << "Rimosso Successore se esiste : " << treeint.SuccessorNRemove(val) << endl;
+
+        }
+        if(type == 2 && scelta == 3)
+        {
+          float val = 0;
+          cout << "Inserisci elemento" << endl;
+          cin  >> val;
+          cout << "Rimosso PredeSuccessorecessore se esiste : " << treefloat.SuccessorNRemove(val) << endl;
+
+        }
+        if(type == 3 && scelta == 3)
+        {
+          string val = "";
+          cout << "Inserisci elemento" << endl;
+          cin  >> val;
+          cout << "Rimosso Predecessore se esiste : " << treestring.SuccessorNRemove(val) << endl;
+        }
       }
       if(scelta == 10)
       {
+        cout << "Quando effettui un inserimento, assicurati che non è già presente, oppure l'elemento non verrà inserito " << endl;
+        cout << "Cosa vuoi inserire?" << endl;
         if(type == 1)
         {
-          cout << "Rimosso Massimo " << treeint.MaxNRemove(); << endl;
+          int dato = 0;
+          cin >> dato;
+          treeint.Insert(dato);
         }
         if(type == 2)
         {
-          cout << "Rimosso Massimo " << treefloat.MaxNRemove(); << endl;
+          float dato = 0;
+          cin >> dato;
+          treeint.Insert(dato);
         }
         if(type == 3)
         {
-          cout << "Rimosso Massimo " << treestring.MaxNRemove(); << endl;
+          string dato = 0;
+          cin >> dato;
+          treeint.Insert(dato);
         }
       }
       if(scelta == 11)
       {
+        cout << "Quando effettui una rimozione, assicurati che è presente, oppure l'elemento non verrà eliminato " << endl;
+        cout << "Cosa vuoi eliminare?" << endl;
         if(type == 1)
         {
-          cout << "Rimosso Minimo " << treeint.MinNRemove(); << endl;
+          int dato = 0;
+          cin >> dato;
+          treeint.Remove(dato);
         }
         if(type == 2)
         {
-          cout << "Rimosso Minimo " << treefloat.MinNRemove(); << endl;
+          float dato = 0;
+          cin >> dato;
+          treeint.Remove(dato);
         }
         if(type == 3)
         {
-          cout << "Rimosso Minimo " << treestring.MinNRemove(); << endl;
+          string dato = 0;
+          cin >> dato;
+          treeint.Remove(dato);
         }
-      }
-      if(scelta == 12)
-      {
-
-      }
-      if(scelta == 13)
-      {
-
-      }
-      if(scelta == 14)
-      {
-
-      }
-      if(scelta == 15)
-      {
-
-      }
-      if(scelta == 16)
-      {
-
-      }
-      if(scelta == 17)
-      {
-
       }
     }
 
