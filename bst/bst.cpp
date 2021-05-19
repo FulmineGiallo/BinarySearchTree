@@ -113,12 +113,17 @@ const Data& BST<Data>::Min() const
 
 // MinNRemove
 template<typename Data>
-const Data& BST<Data>::MinNRemove()
+Data BST<Data>::MinNRemove()
 {
-  if(root != nullptr)
-    return DataNDelete(DetachMin(root));
-  else
+  if(BinaryTreeLnk<Data>::Empty())
     throw std::length_error("Non puoi rimuovere da un albero vuoto");
+  else
+  {
+    NodeLnk* min = DetachMin(root);
+    Data minData = min->element;
+    delete min;
+    return minData;
+  }
 }
 
 // RemoveMin
@@ -147,12 +152,17 @@ const Data& BST<Data>::Max() const
 
 // MaxNRemove
 template<typename Data>
-const Data& BST<Data>::MaxNRemove()
+Data BST<Data>::MaxNRemove()
 {
-  if(root != nullptr)
-    return DataNDelete(DetachMax(root));
-  else
+  if(BinaryTreeLnk<Data>::Empty())
     throw std::length_error("Non puoi rimuovere da un albero vuoto");
+  else
+  {
+    NodeLnk* max = DetachMax(root);
+    Data maxData = max->element;
+    delete max;
+    return maxData;
+  }
 }
 
 // RemoveMax
@@ -186,16 +196,18 @@ const Data& BST<Data>::Predecessor(const Data& val) const
 
 // PredecessorNRemove
 template<typename Data>
-const Data& BST<Data>::PredecessorNRemove(const Data& val){
-  const Data& pre = Predecessor(val);
+Data BST<Data>::PredecessorNRemove(const Data& val)
+{
+  Data pre = Predecessor(val);
   Remove(pre);
   return pre;
 }
 
 // RemovePredecessor
 template<typename Data>
-void BST<Data>::RemovePredecessor(const Data& val){
-  const Data& pre = Predecessor(val);
+void BST<Data>::RemovePredecessor(const Data& val)
+{
+   const Data& pre = Predecessor(val);
    Remove(pre);
 }
 
@@ -217,16 +229,17 @@ const Data& BST<Data>::Successor(const Data& val) const
 
 // SuccessorNRemove
 template<typename Data>
-const Data& BST<Data>::SuccessorNRemove(const Data& val)
+Data BST<Data>::SuccessorNRemove(const Data& val)
 {
-  const Data& suc = Successor(val);
+  Data suc = Successor(val);
   Remove(suc);
   return suc;
 }
 
 // RemoveSuccessor
 template<typename Data>
-void BST<Data>::RemoveSuccessor(const Data& val){
+void BST<Data>::RemoveSuccessor(const Data& val)
+{
   const Data& suc = Successor(val);
   Remove(suc);
 }

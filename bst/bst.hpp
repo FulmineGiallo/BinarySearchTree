@@ -95,7 +95,7 @@ public:
 
   // type MinNRemove(argument) specifiers;
   // (concrete function must throw std::length_error when empty)
-  const Data& MinNRemove();
+  Data MinNRemove();
 
   // type RemoveMin(argument) specifiers;
   // (concrete function must throw std::length_error when empty)
@@ -107,7 +107,7 @@ public:
 
   // type MaxNRemove(argument) specifiers;
   // (concrete function must throw std::length_error when empty)
-  const Data& MaxNRemove();
+  Data MaxNRemove();
 
   // type RemoveMax(argument) specifiers;
   // (concrete function must throw std::length_error when empty)
@@ -119,7 +119,7 @@ public:
 
   // type PredecessorNRemove(argument) specifiers;
   // (concrete function must throw std::length_error when empty)
-  const Data& PredecessorNRemove(const Data&);
+  Data PredecessorNRemove(const Data&);
 
   // type RemovePredecessor(argument) specifiers;
   // (concrete function must throw std::length_error when empty)
@@ -131,7 +131,7 @@ public:
 
   // type SuccessorNRemove(argument) specifiers;
   // (concrete function must throw std::length_error when empty)
-  const Data& SuccessorNRemove(const Data&);
+  Data SuccessorNRemove(const Data&);
 
   // type RemoveSuccessor(argument) specifiers;
   // (concrete function must throw std::length_error when empty)
