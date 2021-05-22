@@ -656,28 +656,21 @@ namespace lasd
       if(scelta == 5 && type == 1) // INT
       {
           cout << "1. Prodotto per gli interi minori di n (Funzione Fold)" << endl;
-          cin  >> function;
-          if(function == 1)
-          {
-            int n2 = 0;
-            int prod = 1;
-            cout << "Inserisci un intero" << endl;
-            cin  >> n2;
-            treeint.FoldPreOrder([](const int & dat,
-                const void * n2, void * prod) {
-                if (dat < * ((int * ) n2)) {
-                  *((int * ) prod) *= dat;
-                }
-              }, & n2, & prod);
-              cout << "Il prodotto degli interi (minori di " << n2 << ") e' : " << prod << endl;
-          }
+          int n2 = 0;
+          int prod = 1;
+          cout << "Inserisci un intero" << endl;
+          cin  >> n2;
+          treeint.FoldPreOrder([](const int & dat,
+              const void * n2, void * prod) {
+              if (dat < * ((int * ) n2)) {
+                *((int * ) prod) *= dat;
+              }
+            }, & n2, & prod);
+          cout << "Il prodotto degli interi (minori di " << n2 << ") e' : " << prod << endl;
       }
       if(scelta == 5 && type == 2) //Float
       {
         cout << "1. Somma per i float maggiori di n (Funzione Fold)" << endl;
-        cin  >> function;
-        if(function == 1)
-        {
           float n2 = 0;
           float sum = 0;
             cout << "Inserisci un n(float):" << endl;
@@ -689,14 +682,10 @@ namespace lasd
                 }
               }, & n2, & sum);
               cout << "La somma dei float (maggiori di " << n2 << ") e' : " << sum << endl;
-        }
       }
       if(scelta == 5 && type == 3) //String
       {
         cout << "1. Concatenazione per le stringhe con lunghezza minore o uguale a n (Funzione Fold)" << endl;
-        cin  >> function;
-        if(function == 1)
-        {
           string stringa = "";
           int n2 = 0;
           cout << "Inserisci la lunghezza" << endl;
@@ -709,7 +698,7 @@ namespace lasd
            }, & n2, & stringa);
 
            cout << "Concatenazione delle stringhe (con lunghezza minore o uguale a " << n2 << ") e' : " << stringa << endl;
-        }
+        
       }
       if(scelta == 6)
       {
@@ -1008,7 +997,7 @@ namespace lasd
         if(type == 2)
          cout << "Size : " << treefloat.Size();
         if(type == 3)
-         cout << "Size : " << treestring.Size()3;
+         cout << "Size : " << treestring.Size();
       }
 
     }
